@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>images/bullet.png</file>
+        <file>images/enemy.png</file>
+        <file>images/player.png</file>
+        <file>Player.qml</file>
+        <file>Bullet.qml</file>
+        <file>myScript.js</file>
+        <file>Enemy.qml</file>
+        <file>Game.qml</file>
+    </qresource>
+</RCC>
