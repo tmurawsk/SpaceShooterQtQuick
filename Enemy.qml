@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "myScript.js" as MyScript
 
 Image {
     id: enemyImg
@@ -6,15 +7,24 @@ Image {
     width: 25
     height: 25
     source: "images/enemy.png"
+    property int speed: 8
 
     PropertyAnimation on y {
         id: enemyAnim
         target: enemyImg
-        to: 300
+        to: mainWin.height
         property: "y"
-        duration: 326*5
-//        onStopped: { enemyImg.visible = false; enemyModel.remove(this) }//enemyImg.destroy(); this.destroy() }
+        duration: speed * (mainWin.height + height - y)
+        onStopped: if(y < mainWin.height) enemyAnim.start()
     }
 
-//    onYChanged: if(y >= 300) { enemyImg.destroy(); this.destroy() }
+    ColorAnimation {
+        id: enemyDeathAnim
+        to: "black"
+        duration: 200
+        running: true
+//        onStopped: this.destroy()
+    }
+
+    onYChanged: if(y >= mainWin.height) { MyScript.removeEnemy(x, y) }
 }

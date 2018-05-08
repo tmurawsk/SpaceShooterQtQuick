@@ -3,6 +3,31 @@ import "myScript.js" as MyScript
 
 Item {
     id: game
+    property int score: 0
+    property int lives: 3
+    property var bulletList: []
+    property var enemyList: []
+
+    Text {
+        id: scoreText
+        x: 5
+        text: 'score: ' + score
+        font.family: "Helvetica"
+        font.bold: true
+        font.pointSize: 18
+        color: "#5555FF"
+    }
+
+    Text {
+        id: livesText
+        x: 5
+        y: 15
+        text: 'lives: ' + lives
+        font.family: "Helvetica"
+        font.bold: true
+        font.pointSize: 18
+        color: "red"
+    }
 
     Timer {
         id: spawningEnemyTimer
@@ -14,7 +39,7 @@ Item {
 
     Timer {
         id: collisionCheckTimer
-        interval: 100
+        interval: 10
         running: true
         repeat: true
         onTriggered: MyScript.checkCollisions()
@@ -24,7 +49,7 @@ Item {
 //        id: enemyList
 //        anchors.fill: parent
 //        model: enemyModel
-//        delegate: Enemy { }
+//        delegate: enemyImg
 //    }
 
 //    ListModel {
@@ -35,7 +60,7 @@ Item {
 //        id: bulletList
 //        anchors.fill: parent
 //        model: bulletModel
-//        delegate: Bullet { }
+//        delegate: bulletImg
 //    }
 
 //    ListModel {

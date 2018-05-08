@@ -3,68 +3,40 @@ import "myScript.js" as MyScript
 
 Image {
     id: playerImg
-    x: 188
-    y: 275
+    x: (mainWin.width - 25)/2
+    y: (mainWin.height - 25)
     width: 25
     height: 25
     source: "images/player.png"
     focus: true
+    property int speed: 4
 
-    states: [
-        State {
-            name: "rightPos"
-            PropertyChanges {
-                target: playerImg
-                x: 375
-            }
-        },
+    Timer {
+        id: playerCollisionCheckTimer
+        interval: 10
+        running: true
+        repeat: true
+        onTriggered: MyScript.checkEnemyCollisions(x, y)
+    }
 
-        State {
-            name: "leftPos"
-            PropertyChanges {
-                target: playerImg
-                x: 0
-            }
-        }
-    ]
+    PropertyAnimation {
+        id: rightAnim
+        target: playerImg
+        property: "x"
+        to: (mainWin.width - width)
+        duration: (speed * (mainWin.width - width - x))
+    }
 
-//    Behavior on x {
-//        id: behav
-//        NumberAnimation {
-//            id: anim
-//            duration: 600
-//        }
-//    }
-
-//    transitions: [
-//        Transition {
-//            id: rightTrans
-//            from: "*"
-//            to: "rightPos"
-            PropertyAnimation {
-                id: rightAnim
-                target: playerImg
-                property: "x"
-                to: 375
-                duration: (2.5 * (375 - x))
-            }
-//        },
-//        Transition {
-//            id: leftTrans
-//            from: "*"
-//            to: "leftPos"
-            PropertyAnimation {
-                id: leftAnim
-                target: playerImg
-                property: "x"
-                to: 0
-                duration: (2.5 * x)
-            }
-//        }
-//    ]
+    PropertyAnimation {
+        id: leftAnim
+        target: playerImg
+        property: "x"
+        to: 0
+        duration: (speed * x)
+    }
 
     Keys.onPressed: {
-        if(event.key === Qt.Key_Right && playerImg.x < 375)
+        if(event.key === Qt.Key_Right && playerImg.x < (mainWin.width - width))
             rightAnim.start()
         if(event.key === Qt.Key_Left && playerImg.x > 0)
             leftAnim.start()

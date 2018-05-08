@@ -7,6 +7,7 @@ Window {
     width: 400
     height: 300
     title: qsTr("Shooter")
+    color: "black"
 
     Game { }
 }
