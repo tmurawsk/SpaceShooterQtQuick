@@ -18,13 +18,5 @@ Image {
         onStopped: if(y < mainWin.height) enemyAnim.start()
     }
 
-    ColorAnimation {
-        id: enemyDeathAnim
-        to: "black"
-        duration: 200
-        running: true
-//        onStopped: this.destroy()
-    }
-
     onYChanged: if(y >= mainWin.height) { MyScript.removeEnemy(x, y) }
 }

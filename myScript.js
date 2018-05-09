@@ -1,5 +1,6 @@
 var component;
 var bullet;
+var explosion;
 var enemy;
 var i;
 var j;
@@ -12,13 +13,7 @@ function createBullet(playerX, playerY) {
         console.log("Error creating bullet");
     }
 
-//    bulletArray.push(bullet);
     bulletList.push(bullet);
-//    bulletList.unshift(bullet);
-//    bulletArray.unshift(bullet));
-//    bulletArray[bulletIndex] = bullet; bulletIndex = (bulletIndex+1)%100;
-//    bulletLength++;
-//    bulletModel.append(bullet);
 }
 
 function spawnEnemy() {
@@ -29,19 +24,10 @@ function spawnEnemy() {
         console.log("Error creating enemy");
     }
 
-//    enemyArray.push(enemy);
     enemyList.push(enemy);
-//    enemyList.unshift(enemy);
-//    enemyArray.unshift(enemy);
-//    enemyArray[enemyIndex] = enemy; enemyIndex = (enemyIndex+1)%100;
-//    enemyLength++;
-//    enemyModel.append(enemy);
 }
 
 function checkCollisions() {
-
-//    console.log(enemyList.length);
-//    console.log(enemyList[0].y);
 
     for(i = 0; i < bulletList.length; i++){
         if(bulletList[i] === undefined){
@@ -55,18 +41,21 @@ function checkCollisions() {
 
             if(bulletList[i].x > (enemyList[j].x - 5) && bulletList[i].x < (enemyList[j].x + 25)
                     && bulletList[i].y < (enemyList[j].y + 25)){
-//                console.log("COLLISION");
+                component = Qt.createComponent("Explosion.qml");
+                explosion = component.createObject(mainWin, { "x": enemyList[j].x-12, "y": enemyList[j].y-12 });
+
                 score++;
                 bulletList[i].destroy();
                 enemyList[j].destroy();
                 bulletList.slice(i, 1);
                 enemyList.slice(j, 1);
+
             }
         }
     }
 }
 
-function checkEnemyCollisions(playerX, playerY){
+function checkPlayerCollisions(playerX, playerY){
     for(j = 0; j < enemyList.length; j++){
         if(enemyList[j] === undefined){
             continue;
@@ -74,7 +63,9 @@ function checkEnemyCollisions(playerX, playerY){
 
         if(enemyList[j].x > (playerX - 25) && enemyList[j].x < (playerX + 25)
                 && enemyList[j].y > (playerY - 25) && enemyList[j].y < (playerY + 25)){
-//            console.log("PLAYER COLLISION");
+            component = Qt.createComponent("Explosion.qml");
+            explosion = component.createObject(mainWin, { "x": enemyList[j].x-12, "y": enemyList[j].y-12 });
+
             lives--;
             enemyList[j].destroy();
             enemyList.slice(j, 1);

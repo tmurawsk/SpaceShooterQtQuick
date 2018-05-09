@@ -16,7 +16,7 @@ Image {
         interval: 10
         running: true
         repeat: true
-        onTriggered: MyScript.checkEnemyCollisions(x, y)
+        onTriggered: MyScript.checkPlayerCollisions(x, y)
     }
 
     PropertyAnimation {

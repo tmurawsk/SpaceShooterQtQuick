@@ -45,27 +45,5 @@ Item {
         onTriggered: MyScript.checkCollisions()
     }
 
-//    ListView {
-//        id: enemyList
-//        anchors.fill: parent
-//        model: enemyModel
-//        delegate: enemyImg
-//    }
-
-//    ListModel {
-//        id: enemyModel
-//    }
-
-//    ListView {
-//        id: bulletList
-//        anchors.fill: parent
-//        model: bulletModel
-//        delegate: bulletImg
-//    }
-
-//    ListModel {
-//        id: bulletModel
-//    }
-
     Player { }
 }

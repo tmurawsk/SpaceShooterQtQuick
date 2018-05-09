@@ -9,5 +9,7 @@
         <file>myScript.js</file>
         <file>Enemy.qml</file>
         <file>Game.qml</file>
+        <file>Explosion.qml</file>
+        <file>images/explosion.png</file>
     </qresource>
 </RCC>
